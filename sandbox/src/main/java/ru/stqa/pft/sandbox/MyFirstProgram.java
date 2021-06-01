@@ -13,10 +13,10 @@ public class MyFirstProgram {
     Rectangle r = new Rectangle(4, 6);
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-// задание №2 (п.1 - п.3)
+// задание №2 (п.4)
     Point c = new Point(1, 3);
     Point d = new Point(2, 4);
-    System.out.println("Расстояние между двумя точками: " + Math.sqrt(distance(c.a, d.a) * distance(c.a, d.a) + distance(c.b, d.b) * distance(c.b, d.b)));
+    System.out.println("Расстояние между двумя точками: " + Math.sqrt(c.distance() * c.distance() + d.distance() * d.distance()));
 
   }
 
@@ -25,9 +25,4 @@ public class MyFirstProgram {
     System.out.println("Hello," + somebody + "!");
   }
 
-  // задание №2 (п.1 - п.3)
-  public static double distance(double p1, double p2) {
-    return p1 - p2;
   }
-
-}
