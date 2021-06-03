@@ -1,5 +1,7 @@
 package ru.stqa.pft.sandbox;
 
+import org.testng.Assert;
+
 public class MyFirstProgram {
 
   public static void main(String[] args) {
@@ -17,6 +19,8 @@ public class MyFirstProgram {
     Point one = new Point(1, 3);
     Point two = new Point(4, 6);
     System.out.println("Расстояние между двумя точками: " + one.distance(two));
+    Assert.assertEquals(one.distance(two), 4.242640687119285, "Неверно");
+    Assert.assertNotNull(one.distance(two));
 
   }
 
