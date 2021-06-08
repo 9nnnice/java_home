@@ -26,7 +26,7 @@ public class GroupCreationTests {
 
   @Test
   public void testGroupCreation() throws Exception {
-    goroGroupPage("groups");
+    gotoGroupPage("groups");
     initGroupCreation("new");
     fillGroupForm(new GroupData("test1", "test2", "test3"));
     submitGroupCreation("submit");
@@ -55,7 +55,7 @@ public class GroupCreationTests {
     wd.findElement(By.name(s)).click();
   }
 
-  private void goroGroupPage(String groups) {
+  private void gotoGroupPage(String groups) {
     wd.findElement(By.linkText(groups)).click();
   }
 
