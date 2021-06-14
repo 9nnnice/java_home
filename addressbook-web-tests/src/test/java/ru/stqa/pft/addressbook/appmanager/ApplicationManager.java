@@ -9,10 +9,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
   protected WebDriver wd;
 
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public void init() {
@@ -20,9 +19,19 @@ public class ApplicationManager {
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/#");
     groupHelper = new GroupHelper(wd);
-    navigationHelper = new NavigationHelper(wd);
-    sessionHelper = new SessionHelper(wd);
-    sessionHelper.login("user", "admin", "pass", "secret", By.xpath("//input[@value='Login']"));
+    login("user", "admin", "pass", "secret", By.xpath("//input[@value='Login']"));
+  }
+
+  private void login(String user, String username, String pass, String secret, By xpath) {
+    wd.findElement(By.name(user)).clear();
+    wd.findElement(By.name(user)).sendKeys(username);
+    wd.findElement(By.name(pass)).clear();
+    wd.findElement(By.name(pass)).sendKeys(secret);
+    wd.findElement(xpath).click();
+  }
+
+  public void gotoGroupPage() {
+    wd.findElement(By.linkText("groups")).click();
   }
 
   public void stop() {
@@ -50,9 +59,5 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
-  }
-
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
   }
 }
