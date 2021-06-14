@@ -28,7 +28,7 @@ public class AddNewTests {
   @Test
   public void testAddNew() throws Exception {
     addNewForm(By.linkText("add new"));
-    fillAddNewForm(new GroupDataForm("Тест", "Тестович", "+79098887766", "123@mail.ru"));
+    fillAddNewForm(new ContactForm("Тест", "Тестович", "+79098887766", "123@mail.ru"));
     submitChanges("(//input[@name='submit'])[2]");
   }
 
@@ -36,7 +36,7 @@ public class AddNewTests {
     wd.findElement(add_new).click();
   }
 
-  private void fillAddNewForm(GroupDataForm groupDataForm) {
+  private void fillAddNewForm(ContactForm groupDataForm) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(groupDataForm.getName1());
