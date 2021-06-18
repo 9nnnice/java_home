@@ -1,11 +1,12 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.pft.addressbook.model.ContactData;
 
-public class AddNewTests {
+public class ContactCreationTests {
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
@@ -28,7 +29,7 @@ public class AddNewTests {
   @Test
   public void testAddNew() throws Exception {
     addNewForm(By.linkText("add new"));
-    fillAddNewForm(new ContactForm("Тест", "Тестович", "+79098887766", "123@mail.ru"));
+    fillAddNewForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
     submitChanges("(//input[@name='submit'])[2]");
   }
 
@@ -36,7 +37,7 @@ public class AddNewTests {
     wd.findElement(add_new).click();
   }
 
-  private void fillAddNewForm(ContactForm groupDataForm) {
+  private void fillAddNewForm(ContactData groupDataForm) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(groupDataForm.getName1());
