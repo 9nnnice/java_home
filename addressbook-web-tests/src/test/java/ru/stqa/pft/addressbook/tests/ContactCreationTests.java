@@ -27,17 +27,17 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testContactCreation() throws Exception {
-    addContactForm(By.linkText("add new"));
-    fillContactForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
+  public void testAddNew() throws Exception {
+    addNewForm(By.linkText("add new"));
+    fillAddNewForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
     submitChanges("(//input[@name='submit'])[2]");
   }
 
-  private void addContactForm(By add_new) {
+  private void addNewForm(By add_new) {
     wd.findElement(add_new).click();
   }
 
-  private void fillContactForm(ContactData groupDataForm) {
+  private void fillAddNewForm(ContactData groupDataForm) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(groupDataForm.getName1());
