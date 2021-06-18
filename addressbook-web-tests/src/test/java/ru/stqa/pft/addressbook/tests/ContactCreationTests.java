@@ -21,6 +21,7 @@ public class ContactCreationTests {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
@@ -28,12 +29,12 @@ public class ContactCreationTests {
 
   @Test
   public void testContactCreation() throws Exception {
-    addContactForm(By.linkText("add new"));
+    submitContactForm(By.linkText("add new"));
     fillContactForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
-    submitChanges("(//input[@name='submit'])[2]");
+    initContactCreation("(//input[@name='submit'])[2]");
   }
 
-  private void addContactForm(By add_new) {
+  private void submitContactForm(By add_new) {
     wd.findElement(add_new).click();
   }
 
@@ -52,22 +53,13 @@ public class ContactCreationTests {
     wd.findElement(By.name("email")).sendKeys(groupDataForm.getMail());
   }
 
-  private void submitChanges(String s) {
+  private void initContactCreation(String s) {
     wd.findElement(By.xpath(s)).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     wd.quit();
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
   }
 
   private boolean isAlertPresent() {
