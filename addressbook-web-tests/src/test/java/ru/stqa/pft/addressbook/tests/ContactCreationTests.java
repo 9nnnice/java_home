@@ -1,12 +1,13 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.pft.addressbook.model.ContactData;
 
-public class AddNewTests {
-  private WebDriver wd;
+public class ContactCreationTests {
+  WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
@@ -16,10 +17,11 @@ public class AddNewTests {
     login("admin", "secret");
   }
 
-  private void login(String username, String password) {
+  public void login(String username, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
@@ -28,15 +30,15 @@ public class AddNewTests {
   @Test
   public void testAddNew() throws Exception {
     addNewForm(By.linkText("add new"));
-    fillAddNewForm(new ContactForm("Тест", "Тестович", "+79098887766", "123@mail.ru"));
+    fillAddNewForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
     submitChanges("(//input[@name='submit'])[2]");
   }
 
-  private void addNewForm(By add_new) {
+  public void addNewForm(By add_new) {
     wd.findElement(add_new).click();
   }
 
-  private void fillAddNewForm(ContactForm groupDataForm) {
+  public void fillAddNewForm(ContactData groupDataForm) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(groupDataForm.getName1());
@@ -51,7 +53,7 @@ public class AddNewTests {
     wd.findElement(By.name("email")).sendKeys(groupDataForm.getMail());
   }
 
-  private void submitChanges(String s) {
+  public void submitChanges(String s) {
     wd.findElement(By.xpath(s)).click();
   }
 
@@ -60,16 +62,7 @@ public class AddNewTests {
     wd.quit();
   }
 
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
+  public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
