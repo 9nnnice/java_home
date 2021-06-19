@@ -32,6 +32,7 @@ public class ContactCreationTests extends TestBase {
     SubmitContactCreation(By.linkText("add new"));
     fillContactForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
     initContactCreation("(//input[@name='submit'])[2]");
+    returnToHomePage("home page");
   }
 
   public void SubmitContactCreation(By add_new) {
@@ -55,6 +56,10 @@ public class ContactCreationTests extends TestBase {
 
   public void initContactCreation(String s) {
     wd.findElement(By.xpath(s)).click();
+  }
+
+  public void returnToHomePage(String s) {
+    wd.findElement(By.linkText(s)).click();
   }
 
   @AfterMethod(alwaysRun = true)
