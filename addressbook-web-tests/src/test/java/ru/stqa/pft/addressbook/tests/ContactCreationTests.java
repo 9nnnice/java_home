@@ -6,7 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase {
   WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
@@ -28,17 +28,17 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testAddNew() throws Exception {
-    addNewForm(By.linkText("add new"));
-    fillAddNewForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
-    submitChanges("(//input[@name='submit'])[2]");
+  public void testContactCreation() throws Exception {
+    SubmitContactCreation(By.linkText("add new"));
+    fillContactForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
+    initContactCreation("(//input[@name='submit'])[2]");
   }
 
-  public void addNewForm(By add_new) {
+  public void SubmitContactCreation(By add_new) {
     wd.findElement(add_new).click();
   }
 
-  public void fillAddNewForm(ContactData groupDataForm) {
+  public void fillContactForm(ContactData groupDataForm) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(groupDataForm.getName1());
@@ -53,7 +53,7 @@ public class ContactCreationTests {
     wd.findElement(By.name("email")).sendKeys(groupDataForm.getMail());
   }
 
-  public void submitChanges(String s) {
+  public void initContactCreation(String s) {
     wd.findElement(By.xpath(s)).click();
   }
 
