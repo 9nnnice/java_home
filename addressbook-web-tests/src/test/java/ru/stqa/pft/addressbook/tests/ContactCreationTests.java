@@ -29,14 +29,14 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-    SubmitContactCreation(By.linkText("add new"));
+    SubmitContactCreation();
     fillContactForm(new ContactData("Тест", "Тестович", "+79098887766", "123@mail.ru"));
-    initContactCreation("(//input[@name='submit'])[2]");
-    returnToHomePage("home page");
+    initContactCreation();
+    returnToHomePage();
   }
 
-  public void SubmitContactCreation(By add_new) {
-    wd.findElement(add_new).click();
+  public void SubmitContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   public void fillContactForm(ContactData groupDataForm) {
@@ -54,12 +54,12 @@ public class ContactCreationTests extends TestBase {
     wd.findElement(By.name("email")).sendKeys(groupDataForm.getMail());
   }
 
-  public void initContactCreation(String s) {
-    wd.findElement(By.xpath(s)).click();
+  public void initContactCreation() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  public void returnToHomePage(String s) {
-    wd.findElement(By.linkText(s)).click();
+  public void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
   }
 
   @AfterMethod(alwaysRun = true)
